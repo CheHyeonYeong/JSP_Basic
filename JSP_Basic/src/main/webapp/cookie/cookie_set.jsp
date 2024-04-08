@@ -20,6 +20,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<a href="cookie_get.jsp">쿠키 확인하기</a>
 </body>
 </html>
