@@ -39,6 +39,17 @@
   input[type="submit"]:hover {
     background-color: #0056b3;
   }
+  input[type="reset"] {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  input[type="reset"]:hover {
+    background-color: #0056b3;
+  }
 </style>
 </head>
 <body>
@@ -93,7 +104,7 @@
     </table>
     <br>
     <input type="submit" value="예약">
-    <input type="submit" value="취소">
+    <input type="reset" value="취소">
   </form>
 </div>
 </body>
