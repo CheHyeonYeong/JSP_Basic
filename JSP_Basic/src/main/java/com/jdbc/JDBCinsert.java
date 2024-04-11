@@ -1,4 +1,4 @@
-package com.bean;
+package com.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -25,7 +25,7 @@ public class JDBCinsert {
 		
 		try {
 		     Class.forName("com.mysql.cj.jdbc.Driver");
-		     conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbctest", "root", "root");
+		     conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbctest", "jdbc","jdbc");
 	         System.out.println(conn);
 	         System.out.println("데이터베이스 접속 성공.");
 	         pstmt = conn.prepareStatement(sql);
@@ -34,7 +34,6 @@ public class JDBCinsert {
 	         pstmt.setString(2,pw);
 	         pstmt.setString(3,name);
 	         pstmt.setString(4,email);
-
 	            
 	         int result = pstmt.executeUpdate();
 	         if(result != 0) {
@@ -42,7 +41,6 @@ public class JDBCinsert {
 	         }else {
 	        	 System.out.println("SQL실패");
 	        	 }
-	         
 		}  catch (ClassNotFoundException e) {
 	         System.out.println("드라이버 로드 실패");
 	      }catch (SQLException sqle) {
