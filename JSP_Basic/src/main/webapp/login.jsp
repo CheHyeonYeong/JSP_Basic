@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-		<h2>회원 가입 연습</h2>
+		<h2>로그인 연습</h2>
 	<body>
 	<form action="login_ok" method="post">
 	ID : <input type="text" name="id"><br> 

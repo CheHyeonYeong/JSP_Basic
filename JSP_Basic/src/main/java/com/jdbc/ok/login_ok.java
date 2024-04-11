@@ -36,7 +36,6 @@ public class login_ok extends HttpServlet {
 		if(result ==1) {//성공시 처리
 			HttpSession session = request.getSession();
 	        session.setAttribute("id", id);
-			session.setAttribute("id", id);
 			response.sendRedirect("mypage.jsp");
 		}else { //실패 시 처리
 			response.sendRedirect("login_fail.jsp");
