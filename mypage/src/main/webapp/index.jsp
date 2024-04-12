@@ -35,65 +35,15 @@
     </script>
 
     
-    
 </head>
 
 <body>
-	<!-- header -->
-	<div class="brand">My Web</div>        
-    <div class="address-bar">Welcome to MyWorld</div>
-		
-    
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                
-                <a class="navbar-brand" href="/hong">My First Web</a>
-            </div>
-           
-           
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="">HOME</a>
-                    </li>
-                    <li>
-                        <a href="">Member</a>
-                    </li>
-                    <li>
-                        <a href="">BOARD</a>
-                    </li>
-                    <li>
-                        <a href="">LOGIN</a>
-                    </li>
-                    <li>
-                        <a href="" style="color:red">JOIN</a>
-                    </li>
-                </ul>
-            </div>
-            
-            
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
- 	<!-- end header -->
- 
- 
- 
+	<%@include file="include/header.jsp" %>
  
  
     <div class="container">
     
         <div class="row ">
-        	
-        	       
             <div class="box">
                 
                        
@@ -118,10 +68,7 @@
                             <div class="item">
                                 <img class="img-responsive img-full" src="img/3.jpg">
                             </div>
-                           
                         </div>
-
-                       	
                         <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
                             <span class="icon-prev"></span>
                         </a>
@@ -147,11 +94,7 @@
 						<iframe width="100%" height="372px" src="https://www.youtube.com/embed/1C6dcnVQjSM?autoplay=1&amp;loop=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>></iframe>
 					
                  </div>   
-                    
-                
             </div>
-            
-          
             
         </div>
 
@@ -190,17 +133,8 @@
     <!-- /.container -->
     </div>
     
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <p>Copyright &copy; By Park 2018.XX.XX~</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-	
-	
+	<%@include file="include/footer.jsp" %>
+ 
 	
 </body>
 </html>

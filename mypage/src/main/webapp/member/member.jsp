@@ -28,48 +28,9 @@
 
 </head>
 <body>
-<div class="brand">My First Web</div>        
-    <div class="address-bar">Let's Start!</div>
-		
-    <!-- Navigation -->
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                
-                <a class="navbar-brand" href="/hong">My First Web</a>
-            </div>
-           
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                	
-                    <li>
-                        <a href="">HOME</a>
-                    </li>
-                    <li>
-                        <a href="">Member</a>
-                    </li>
-                    <li>
-                        <a href="#">BOARD</a>
-                    </li>
-                    <li>
-                        <a href="#">LOGIN</a>
-                    </li>
-                    <li>
-                        <a data-toggle="modal" href="#myModal" style="color:red">JOIN</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
+
+
+	<%@include file="../include/header.jsp" %>
 
 <div class="container">
 		<div class="row">
@@ -103,8 +64,6 @@
                 
             </div>
         </div>
-
-
 
         <div class="row">
             <div class="box">
@@ -165,15 +124,8 @@
     </div>
     <!-- /.container -->
     
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <p>Copyright &copy; By Park 2018.XX.XX~</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-	
+
+
+	<%@include file="../include/footer.jsp" %>	
 </body>
 </html>
