@@ -147,6 +147,101 @@ public class UserDAO {
 		return result;
 		
 	}
+	//회원 정보 수집
+	public UserVO getInfo(String id) {
+		UserVO vo = null;
+		String sql = "select * from user where id = ?";
+
+		try {
+			int result = 0;
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		     conn = DriverManager.getConnection(url, user, password);
+	         System.out.println(conn);
+	         System.out.println("데이터베이스 접속 성공.");
+
+	         pstmt = conn.prepareStatement(sql);
+	         
+	         pstmt.setString(1, id); // id 값이 문자열이므로 setString을 사용하여 데이터 타입을 지정
+
+	         rs = pstmt.executeQuery(); // 쿼리 실행 결과를 ResultSet에 저장
+
+	         if (rs.next()) {
+	             result = 1; // 존재하는 경우 1, 존재하지 않는 경우 0
+	             
+	             String name = rs.getString("name");
+	             String pw = rs.getString("pw");
+	             String phone1 = rs.getString("phone1");
+	             String phone2 = rs.getString("phone2");
+	             String gender = rs.getString("gender");
+	             
+	             vo = new UserVO(id, pw, name,phone1, phone2, gender);
+	             
+	         }
+	         
+	         if(result != 0) {
+	         	System.out.println("SQL성공");
+	         }else {
+	        	 System.out.println("SQL실패");
+	        	 }	
+
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			 try {
+				 if(conn!=null) conn.close();
+				 if(pstmt!=null) pstmt.close();
+				 if(rs!=null) rs.close();
+		            
+	         } catch (Exception e) {
+	            // TODO: handle exception
+	         }
+		}
+		
+		return vo;
+	}
+	public int update(UserVO vo) {
+		int result = 0;
+		
+		String sql = "update user set name=?, phone1=?, phone2=?, gender=? where id=?";
+		
+		try {
+		     Class.forName("com.mysql.cj.jdbc.Driver");
+		     conn = DriverManager.getConnection(url, user,password);
+	         System.out.println(conn);
+	         System.out.println("데이터베이스 접속 성공.");
+	         pstmt = conn.prepareStatement(sql);
+	         
+	         pstmt.setString(1,vo.getName());
+	         pstmt.setString(2,vo.getPhone1());
+	         pstmt.setString(3,vo.getPhone2());
+	         pstmt.setString(4,vo.getGender());
+	         pstmt.setString(5,vo.getId());
+	            
+	         result = pstmt.executeUpdate();
+	         
+	         if(result != 0) {
+	         	System.out.println("SQL성공");
+	         }else {
+	        	 System.out.println("SQL실패");
+	        	 }
+		}  catch (ClassNotFoundException e) {
+	         System.out.println("드라이버 로드 실패");
+	      }catch (SQLException sqle) {
+	         System.out.println("SQL 연동 오류");
+	         System.out.println(sqle.getMessage());
+	      }finally {
+	         try {
+	            
+	         } catch (Exception e) {
+	            // TODO: handle exception
+	         }
+	      }
+		
+		return result;
+		
+	}
 
 	
 }
