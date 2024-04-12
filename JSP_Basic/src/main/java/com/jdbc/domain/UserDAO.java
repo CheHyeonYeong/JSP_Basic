@@ -205,12 +205,10 @@ public class UserDAO {
 		int result = 0;
 		
 		String sql = "update user set name=?, phone1=?, phone2=?, gender=? where id=?";
-		
 		try {
 		     Class.forName("com.mysql.cj.jdbc.Driver");
 		     conn = DriverManager.getConnection(url, user,password);
-	         System.out.println(conn);
-	         System.out.println("데이터베이스 접속 성공.");
+	         
 	         pstmt = conn.prepareStatement(sql);
 	         
 	         pstmt.setString(1,vo.getName());
@@ -220,12 +218,7 @@ public class UserDAO {
 	         pstmt.setString(5,vo.getId());
 	            
 	         result = pstmt.executeUpdate();
-	         
-	         if(result != 0) {
-	         	System.out.println("SQL성공");
-	         }else {
-	        	 System.out.println("SQL실패");
-	        	 }
+
 		}  catch (ClassNotFoundException e) {
 	         System.out.println("드라이버 로드 실패");
 	      }catch (SQLException sqle) {
@@ -233,7 +226,42 @@ public class UserDAO {
 	         System.out.println(sqle.getMessage());
 	      }finally {
 	         try {
+				 if(conn!=null) conn.close();
+				 if(pstmt!=null) pstmt.close();
+				 if(rs!=null) rs.close();
+	         } catch (Exception e) {
+	            // TODO: handle exception
+	         }
+	      }
+		
+		return result;
+		
+	}
+	
+	public int delete(String id) {
+		int result =0;
+
+		String sql = "delete from user where id=?";
+		try {
+		     Class.forName("com.mysql.cj.jdbc.Driver");
+		     conn = DriverManager.getConnection(url, user,password);
+	         
+	         pstmt = conn.prepareStatement(sql);
+	         
+	         pstmt.setString(1,id);
 	            
+	         result = pstmt.executeUpdate();
+
+		}  catch (ClassNotFoundException e) {
+	         System.out.println("드라이버 로드 실패");
+	      }catch (SQLException sqle) {
+	         System.out.println("SQL 연동 오류");
+	         System.out.println(sqle.getMessage());
+	      }finally {
+	         try {
+				 if(conn!=null) conn.close();
+				 if(pstmt!=null) pstmt.close();
+				 if(rs!=null) rs.close();
 	         } catch (Exception e) {
 	            // TODO: handle exception
 	         }

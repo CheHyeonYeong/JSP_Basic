@@ -40,7 +40,6 @@
 	<%} %>
 	<input type = "submit" value= "가입">
 	</form>
-	
 	<form action="modify_ok" method="post">
   		<button type="submit">비밀번호 수정</button>
 	</form>
