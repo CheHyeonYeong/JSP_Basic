@@ -3,47 +3,43 @@ package com.jdbc.domain;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
 public class UserDAO {
 	
 	//-----------------중복되는 코드를 멤버변수로 선언
-	
-
-	
-	private PreparedStatement pstmt = null;
-	
 	//싱글톤 패턴 : 하나의 객체만 생성하여 사용하도록 만드는 패턴
 	private static UserDAO instance  = new UserDAO();
 	//Connection 객체를 생성하기 위한 값
-    private String url ="jdbc:mysql://localhost:3306/jdbctest";
-    private String user = "jdbc";
-    private String password = "jdbc";
+//    private String url ="jdbc:mysql://localhost:3306/jdbctest";
+//    private String user = "jdbc";
+//    private String password = "jdbc";
 
-    //데이터 접속을 위한 객체 데이터베이스 연결 객체(Connection 객체)
-    Connection conn = null; //비어있는 객체선언.
+	private DataSource ds;
+
+	private PreparedStatement pstmt = null;
+	//데이터 접속을 위한 객체 데이터베이스 연결 객체(Connection 객체)    
+	Connection conn = null; //비어있는 객체선언.
     ResultSet rs = null;
+    
 	private UserDAO() {
 		//생성자가 한 번 동작할 때 드라이버와 연결
 		 try {
-	            Class.forName("com.mysql.cj.jdbc.Driver");
-
-	            // 2. Connection 객체 생성 - DriverManger.getConnection 이용
-	            conn = DriverManager.getConnection(url, user, password);
-	            System.out.println(conn);
-	            System.out.println("데이터베이스 접속 성공.");
-	            
+			 // 2. Connection 객체 생성 - DriverManger.getConnection 이용
+            InitialContext ctx = new InitialContext(); //초기 설정 파일 저장되는 객체
+            ds = (DataSource)ctx.lookup("java:comp/env/jdbc/mysql");
+            
+            System.out.println(conn);
 	           
-	            
-	        } catch (ClassNotFoundException e) {
-	            System.out.println("드라이버 로드 실패");
-	        }
-	        catch(SQLException sqle) {
-	            System.out.println("SQL 연동 오류");
-	            System.out.println(sqle.getMessage());
-
-	        }
+        } catch (NamingException e) {
+            System.out.println("connection pooling error");
+        }
 	}
 	public static UserDAO getInstance() {
 		return instance;
@@ -51,9 +47,6 @@ public class UserDAO {
 	public static void setInstance(UserDAO instance) {
 		UserDAO.instance = instance;
 	}
-	
-
-	
 	
 	//-----------------기능을 메소드로 선언
 	
@@ -64,8 +57,7 @@ public class UserDAO {
 		String sql = "insert into user values(?,?,?,?,?,?)";
 		
 		try {
-		     Class.forName("com.mysql.cj.jdbc.Driver");
-		     conn = DriverManager.getConnection(url, user,password);
+		     conn = ds.getConnection();
 	         System.out.println(conn);
 	         System.out.println("데이터베이스 접속 성공.");
 	         pstmt = conn.prepareStatement(sql);
@@ -84,9 +76,7 @@ public class UserDAO {
 	         }else {
 	        	 System.out.println("SQL실패");
 	        	 }
-		}  catch (ClassNotFoundException e) {
-	         System.out.println("드라이버 로드 실패");
-	      }catch (SQLException sqle) {
+		}  catch (SQLException sqle) {
 	         System.out.println("SQL 연동 오류");
 	         System.out.println(sqle.getMessage());
 	      }finally {
@@ -105,44 +95,37 @@ public class UserDAO {
 		int result = 0;
 		 String sql = "select * from user where id=? and pw=?";
 
-			try {
-				Class.forName("com.mysql.cj.jdbc.Driver");
-			     conn = DriverManager.getConnection(url, user, password);
-		         System.out.println(conn);
-		         System.out.println("데이터베이스 접속 성공.");
+		try {
+			
+			conn = ds.getConnection();
+	         System.out.println(conn);
+	         System.out.println("데이터베이스 접속 성공.");
 
-		         pstmt = conn.prepareStatement(sql);
-		         
-		         pstmt.setString(1, id); // id 값이 문자열이므로 setString을 사용하여 데이터 타입을 지정
-		         pstmt.setString(2, pw); // pw 값이 문자열이므로 setString을 사용하여 데이터 타입을 지정
+	         pstmt = conn.prepareStatement(sql);
+	         
+	         pstmt.setString(1, id); // id 값이 문자열이므로 setString을 사용하여 데이터 타입을 지정
+	         pstmt.setString(2, pw); // pw 값이 문자열이므로 setString을 사용하여 데이터 타입을 지정
 
-		         
-		         rs = pstmt.executeQuery(); // 쿼리 실행 결과를 ResultSet에 저장
+	         rs = pstmt.executeQuery(); // 쿼리 실행 결과를 ResultSet에 저장
 
-		         if (rs.next()) {
-		             result = 1; // 존재하는 경우 1, 존재하지 않는 경우 0
-		         }
-		         
-		         if(result != 0) {
-		         	System.out.println("SQL성공");
-		         }else {
-		        	 System.out.println("SQL실패");
-		        	 }	
-
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
-			finally {
-				 try {
-					 if(conn!=null) conn.close();
-					 if(pstmt!=null) pstmt.close();
-					 if(rs!=null) rs.close();
-			            
-		         } catch (Exception e) {
-		            // TODO: handle exception
-		         }
-			}
+	         if (rs.next()) {
+	             result = 1; // 존재하는 경우 1, 존재하지 않는 경우 0
+	         }
+	         
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			 try {
+				 if(conn!=null) conn.close();
+				 if(pstmt!=null) pstmt.close();
+				 if(rs!=null) rs.close();
+		            
+	         } catch (Exception e) {
+	            // TODO: handle exception
+	         }
+		}
 		
 		return result;
 		
@@ -154,8 +137,7 @@ public class UserDAO {
 
 		try {
 			int result = 0;
-			Class.forName("com.mysql.cj.jdbc.Driver");
-		     conn = DriverManager.getConnection(url, user, password);
+			conn = ds.getConnection();
 	         System.out.println(conn);
 	         System.out.println("데이터베이스 접속 성공.");
 
@@ -206,8 +188,7 @@ public class UserDAO {
 		
 		String sql = "update user set name=?, phone1=?, phone2=?, gender=? where id=?";
 		try {
-		     Class.forName("com.mysql.cj.jdbc.Driver");
-		     conn = DriverManager.getConnection(url, user,password);
+			conn = ds.getConnection();
 	         
 	         pstmt = conn.prepareStatement(sql);
 	         
@@ -219,9 +200,7 @@ public class UserDAO {
 	            
 	         result = pstmt.executeUpdate();
 
-		}  catch (ClassNotFoundException e) {
-	         System.out.println("드라이버 로드 실패");
-	      }catch (SQLException sqle) {
+		}  catch (SQLException sqle) {
 	         System.out.println("SQL 연동 오류");
 	         System.out.println(sqle.getMessage());
 	      }finally {
@@ -243,18 +222,12 @@ public class UserDAO {
 
 		String sql = "delete from user where id=?";
 		try {
-		     Class.forName("com.mysql.cj.jdbc.Driver");
-		     conn = DriverManager.getConnection(url, user,password);
-	         
+			conn = ds.getConnection();
 	         pstmt = conn.prepareStatement(sql);
-	         
 	         pstmt.setString(1,id);
-	            
 	         result = pstmt.executeUpdate();
 
-		}  catch (ClassNotFoundException e) {
-	         System.out.println("드라이버 로드 실패");
-	      }catch (SQLException sqle) {
+		}catch (SQLException sqle) {
 	         System.out.println("SQL 연동 오류");
 	         System.out.println(sqle.getMessage());
 	      }finally {

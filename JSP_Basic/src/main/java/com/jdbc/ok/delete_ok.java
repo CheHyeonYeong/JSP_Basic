@@ -24,6 +24,7 @@ public class delete_ok extends HttpServlet {
 		UserDAO dao = UserDAO.getInstance();
 		int result = dao.delete(id);
 		if(result ==1) { //success
+			session.invalidate();
 			response.sendRedirect("login.jsp");
 		}else {//fail
 			response.sendRedirect("mypage.jsp");
