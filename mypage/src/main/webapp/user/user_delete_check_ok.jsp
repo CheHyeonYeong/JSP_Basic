@@ -18,7 +18,8 @@
 	if(result == 0){//예전 비밀번호 실패
 		%>
 		<script>
-		location.href="user_login.jsp";
+		
+		location.href="user_mypage.jsp";
 		</script>
 		
 		<%		
@@ -31,7 +32,6 @@
 			alert("회원 탈퇴 되었습니다.");
 			location.href="http://localhost:8080/mypage/index.jsp";
 			</script>
-			
 			<%
 		}
 		else{
@@ -40,7 +40,6 @@
 			alert("회원 탈퇴에 실패하였습니다.");
 			location.href="user_mypage.jsp";
 			</script>
-			
 			<%
 		}
 		

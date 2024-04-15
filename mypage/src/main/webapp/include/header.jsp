@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+
 <body>
 <!-- header -->
 	<div class="brand">My Web</div>        
@@ -26,14 +27,34 @@
                         <a href="http://localhost:8080/mypage/member/member.jsp">Member</a>
                     </li>
                     <li>
-                        <a href="">BOARD</a>
+                             <a href="/myweb/board/list.board">BOARD</a>
+                    </li>
+                    <%
+
+						String idCheck = (String)session.getAttribute("user_id");
+						String icon;
+						String icon2;
+					
+						if(idCheck ==null){
+							%>
+							<li>
+                        <a href="http://localhost:8080/mypage/user/user_login.jsp">LOGIN</a>
                     </li>
                     <li>
-                        <a href="">LOGIN</a>
+                    	
+                        <a href="http://localhost:8080/mypage/user/user_join.jsp" style="color:red">JOIN</a>
                     </li>
-                    <li>
-                        <a href="" style="color:red">JOIN</a>
-                    </li>
+						<% }
+						else{%>
+						<li>
+		                        <a href="http://localhost:8080/mypage/user/user_logout.jsp">LOGOUT</a>
+		                    </li>
+		                    <li>
+		                    	
+		                        <a href="http://localhost:8080/mypage/user/user_mypage.jsp" style="color:red">MYPAGE</a>
+		                    </li>
+						<% }%>
+                    
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
