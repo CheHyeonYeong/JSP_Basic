@@ -27,7 +27,7 @@
                         <a href="http://localhost:8080/mypage/member/member.jsp">Member</a>
                     </li>
                     <li>
-                             <a href="/myweb/board/list.board">BOARD</a>
+                             <a href="/mypage/board/list.board">BOARD</a>
                     </li>
                     <%
 

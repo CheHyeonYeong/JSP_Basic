@@ -9,8 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.myweb.board.service.ContentServiceImpl;
+import com.myweb.board.service.DeleteServiceImpl;
 import com.myweb.board.service.GetListServiceImpl;
 import com.myweb.board.service.IBoardService;
+import com.myweb.board.service.RegisterServiceImpl;
+import com.myweb.board.service.UpdateServiceImpl;
 
 /**
  * Servlet implementation class BoardController
@@ -48,10 +52,40 @@ public class BoardController extends HttpServlet {
 			//전달해야 할 값은 service 영역에서 전달할 내용을 강제 저장
 			RequestDispatcher dp = request.getRequestDispatcher("board_list.jsp");
 			dp.forward(request, response);
+		}else if(command.equals("/board/write.board")) {//글 작성 페이지
+			response.sendRedirect("board_write.jsp");
 			
+		}else if(command.equals("/board/register.board")) {
+			//서비스 객체 생성
+			service = new RegisterServiceImpl();
+			service.execute(request, response);
 			
+			response.sendRedirect("list.board");
+		}else if(command.equals("/board/content.board")) {
+			service = new ContentServiceImpl();
+			service.execute(request, response);
 			
+			//전달해야 할 값은 service 영역에서 전달할 내용을 강제 저장
+			RequestDispatcher dp = request.getRequestDispatcher("board_content.jsp");
+			dp.forward(request, response);
+		}else if(command.equals("/board/modify.board")) {
+			service = new ContentServiceImpl();
+			service.execute(request, response);
+			
+			//전달해야 할 값은 service 영역에서 전달할 내용을 강제 저장
+			RequestDispatcher dp = request.getRequestDispatcher("board_modify.jsp");
+			dp.forward(request, response); 
+		}else if(command.equals("/board/update.board")) {
+			service = new UpdateServiceImpl();
+			service.execute(request, response);
+			
+			String num= request.getParameter("num");
+			response.sendRedirect("content.board?num="+num);
+		}else if(command.equals("/board/delete.board")) {
+			service = new DeleteServiceImpl();
+			service.execute(request, response);
+			
+			response.sendRedirect("list.board");
 		}
 	}
-
 }

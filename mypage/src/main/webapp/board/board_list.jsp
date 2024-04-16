@@ -1,6 +1,14 @@
+<%@page import="com.myweb.util.PageVO"%>
+<%@page import="com.myweb.board.model.BoardVO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-	<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+	
+
+%>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -35,83 +43,33 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>10</td>
-					<td>testuser</td>
-					<td>title10</td>
-					<td>2024.04.15</td>
-					<td>1</td>
-				</tr>
-				<tr>
-					<td>9</td>
-					<td>testuser</td>
-					<td>title9</td>
-					<td>2024.04.15</td>
-					<td>1</td>
-				</tr>
-				<tr>
-					<td>8</td>
-					<td>testuser</td>
-					<td>title8</td>
-					<td>2024.04.15</td>
-					<td>1</td>
-				</tr>
-				<tr>
-					<td>7</td>
-					<td>testuser</td>
-					<td>title7</td>
-					<td>2024.04.15</td>
-					<td>1</td>
-				</tr>
-				<tr>
-					<td>6</td>
-					<td>testuser</td>
-					<td>title6</td>
-					<td>2024.04.15</td>
-					<td>1</td>
-				</tr>
-				<tr>
-					<td>5</td>
-					<td>testuser</td>
-					<td>title5</td>
-					<td>2024.04.15</td>
-					<td>1</td>
-				</tr>
-				<tr>
-					<td>4</td>
-					<td>testuser</td>
-					<td>title4</td>
-					<td>2024.04.15</td>
-					<td>1</td>
-				</tr>
-				<tr>
-					<td>3</td>
-					<td>testuser</td>
-					<td>title3</td>
-					<td>2024.04.15</td>
-					<td>1</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>testuser</td>
-					<td>title2</td>
-					<td>2024.04.15</td>
-					<td>1</td>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td>testuser</td>
-					<td>title1</td>
-					<td>2024.04.15</td>
-					<td>1</td>
-				</tr>
+			<%
+			ArrayList<BoardVO> lists = (ArrayList<BoardVO>) request.getAttribute("list");
+			for (BoardVO board : lists) {
+			    out.write("<tr>");
+			    out.write("<td>" + board.getNum() + "</td>");
+			    out.write("<td>" + board.getWriter() + "</td>");
+			    out.write("<td><a href='content.board?num="+board.getNum()+"'>" + board.getTitle() + "</td>");
+			    out.write("<td>" + board.getRegdate() + "</td>");
+			    out.write("<td>" + board.getHit() + "</td>");
+			    out.write("</tr>");
+			}
+
+			%>
+				
+				
 			</tbody>
 		</table>
-
+		<%
+			PageVO pagevo = (PageVO)request.getAttribute("pageVO");
+		
+		%>
 		<div align="center">
 			<ul class="pagination pagination-sm">
 				<li><a href="">이전</a></li>
-				<li><a href="">1</a></li>
+				<%for(int i=pagevo.getStartPage() ;i<=pagevo.getEndPage();i++ ){%>
+					<li><a href="list.board?pageNum=<%=i%>"><%=i %></a></li>
+				<%}%>
 				<li><a href="">다음</a></li>
 			</ul>
 		</div>

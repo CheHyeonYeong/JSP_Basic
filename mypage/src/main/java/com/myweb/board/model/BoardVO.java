@@ -14,7 +14,7 @@ public class BoardVO {
     public BoardVO() {}
 
 	public BoardVO(int num, String writer, String title, String content, Timestamp regdate,int hit) {
-		super();
+		
 		this.num = num;
 		this.writer = writer;
 		this.title = title;
