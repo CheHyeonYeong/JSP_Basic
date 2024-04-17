@@ -53,7 +53,7 @@
         <div align="center">
            <ul class="pagination pagination-sm">
  			<c:if test="${pagevo.isPrev()}">
-                   <li><a href="">이전</a></li>
+                  <li><a href="list.board?pageNum=${pageVO.startPage -1 }">이전</a></li>
                </c:if>
         
                <c:forEach var="i" begin="${pagevo.getStartPage()}" end="${pagevo.getEndPage()}" step="1">
@@ -61,7 +61,7 @@
                </c:forEach>
         
               <c:if test="${pagevo.isNext()}">
-                  <li><a href="">다음</a></li>
+                 <li><a href="list.board?pageNum=${pageVO.endPage +1 }">다음</a></li>
               </c:if>
         </ul>
         </div>
