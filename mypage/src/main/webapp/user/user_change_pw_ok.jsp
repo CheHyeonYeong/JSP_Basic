@@ -1,6 +1,6 @@
 <%@page import="com.myweb.user.model.UserDAO"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%
 	String id = (String)session.getAttribute("user_id");
 	
@@ -15,7 +15,7 @@
 	UserDAO dao = UserDAO.getInstance();
 	int result = dao.login(id,oldPw);
 	
-	if(result == 0){//¿¹Àü ºñ¹Ğ¹øÈ£ ½ÇÆĞ
+	if(result == 0){//ì˜ˆì „ ë¹„ë°€ë²ˆí˜¸ ì‹¤íŒ¨
 		%>
 		<script>
 		location.href="user_mypage.jsp";
@@ -27,7 +27,7 @@
 		if(result2==1){
 			%>
 			<script>
-			alert("ºñ¹Ğ¹øÈ£ º¯°æÃ³¸® µÇ¾ú½À´Ï´Ù.");
+			alert("ë¹„ë°€ë²ˆí˜¸ ë³€ê²½ì²˜ë¦¬ ë˜ì—ˆìŠµë‹ˆë‹¤.");
 			location.href="user_mypage.jsp";
 			</script>
 			
@@ -36,7 +36,7 @@
 		else{
 			%>
 			<script>
-			alert("ºñ¹Ğ¹øÈ£ º¯°æ¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.");
+			alert("ë¹„ë°€ë²ˆí˜¸ ë³€ê²½ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.");
 			location.href="user_mypage.jsp";
 			</script>
 			

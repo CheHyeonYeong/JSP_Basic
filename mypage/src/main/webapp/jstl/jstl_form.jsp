@@ -1,18 +1,25 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>if�� Ȯ��</h2>
+	<h2>if절 확인</h2>
 	<form action="jstl_if.jsp">
-		�̸� : <input type="text" name="name"><br>
-		���� : <input type="text" name="age"><br> 
+		이름 : <input type="text" name="name"><br>
+		나이 : <input type="text" name="age"><br> 
+
 		<input type="submit"> 
 	</form>
-
+	<hr>
+	<h2>choose절 확인</h2>
+	<form action="jstl_choose.jsp">
+		이름 : <input type="text" name="name"><br> 
+		나이 : <input type="text" name="age"><br>
+		<input type="submit" value="확인">
+	</form>	
 </body>
 </html>

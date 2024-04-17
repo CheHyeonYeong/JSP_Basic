@@ -1,31 +1,31 @@
 <%@page import="com.myweb.user.model.UserVO"%>
 <%@page import="com.myweb.user.model.UserDAO"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<%
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%
 	request.setCharacterEncoding("utf-8");
 	String id = request.getParameter("id");
 	String pw = request.getParameter("pw");
 
-	//dao »ý¼º
+	//dao ìƒì„±
 	UserDAO dao = UserDAO.getInstance();
 	
 	int result = dao.login(id, pw);
-	if(result == 1){//Áßº¹ ½Ã °æ°í ¶ç¿ì°í È¸¿ø °¡ÀÔ Ã¢À¸·Î µ¹¾Æ°¡±â
-		//·Î±×ÀÎ ¼º°ø½Ã È¸¿øÁ¤º¸ ¾ò¾î¿À´Â ÀÛ¾÷
+	if(result == 1){//ì¤‘ë³µ ì‹œ ê²½ê³  ë„ìš°ê³  íšŒì› ê°€ìž… ì°½ìœ¼ë¡œ ëŒì•„ê°€ê¸°
+		//ë¡œê·¸ì¸ ì„±ê³µì‹œ íšŒì›ì •ë³´ ì–»ì–´ì˜¤ëŠ” ìž‘ì—…
 		UserVO vo = dao.getInfo(id);
 		String name = vo.getName();
 		
 		
-		//¾ÆÀÌµð¿Í ÀÌ¸§À» ¼¼¼Ç¿¡ ÀúÀå
+		//ì•„ì´ë””ì™€ ì´ë¦„ì„ ì„¸ì…˜ì— ì €ìž¥
 		session.setAttribute("user_id", id);
 		session.setAttribute("user_name", name);
 		
-		//mypage.jsp·Î ÀÌµ¿
+		//mypage.jspë¡œ ì´ë™
 		
 		response.sendRedirect("user_mypage.jsp");
 		}
-	else{// Áßº¹ÀÌ ¾ø´Â °æ¿ì È¸¿ø°¡ÀÔ Ã³¸® ÁøÇà
-		out.write("<script>alert(\"·Î±×ÀÎ ½ÇÆÐÇß½À´Ï´Ù.\");history.go(-1);</script>");
+	else{// ì¤‘ë³µì´ ì—†ëŠ” ê²½ìš° íšŒì›ê°€ìž… ì²˜ë¦¬ ì§„í–‰
+		out.write("<script>alert(\"ë¡œê·¸ì¸ ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.\");history.go(-1);</script>");
 	}
 %>

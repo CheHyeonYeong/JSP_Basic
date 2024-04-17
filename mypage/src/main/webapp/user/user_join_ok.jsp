@@ -1,8 +1,7 @@
 <%@page import="com.myweb.user.model.UserVO"%>
 <%@page import="com.myweb.user.model.UserDAO"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%
 
 	request.setCharacterEncoding("utf-8");
@@ -12,28 +11,28 @@
 	String email = request.getParameter("email");
 	String address = request.getParameter("address");
 	
-	//dao »ý¼º
+	//dao ìƒì„±
 	UserDAO dao = UserDAO.getInstance();
 	
 	UserVO vo = new UserVO(id, pw, name, email, address,null);
 	
-	//È¸¿ø °¡ÀÔ Àü¿¡ ¾ÆÀÌµð°¡ Á¸ÀçÇÏ´ÂÁö Áßº¹ °Ë»ç ½ÇÇà
+	//íšŒì› ê°€ìž… ì „ì— ì•„ì´ë””ê°€ ì¡´ìž¬í•˜ëŠ”ì§€ ì¤‘ë³µ ê²€ì‚¬ ì‹¤í–‰
 	int result = dao.IdConfirm(id);
 	
-	if(result == 1){//Áßº¹ ½Ã °æ°í ¶ç¿ì°í È¸¿ø °¡ÀÔ Ã¢À¸·Î µ¹¾Æ°¡±â
-		out.write("<script>alert(\"¾ÆÀÌµð°¡ Áßº¹µÇ¾ú½À´Ï´Ù.\");history.go(-1);</script>");
+	if(result == 1){//ì¤‘ë³µ ì‹œ ê²½ê³  ë„ìš°ê³  íšŒì› ê°€ìž… ì°½ìœ¼ë¡œ ëŒì•„ê°€ê¸°
+		out.write("<script>alert(\"ì•„ì´ë””ê°€ ì¤‘ë³µë˜ì—ˆìŠµë‹ˆë‹¤.\");history.go(-1);</script>");
 	}
-	else{// Áßº¹ÀÌ ¾ø´Â °æ¿ì È¸¿ø°¡ÀÔ Ã³¸® ÁøÇà
+	else{// ì¤‘ë³µì´ ì—†ëŠ” ê²½ìš° íšŒì›ê°€ìž… ì²˜ë¦¬ ì§„í–‰
 		int result2 = dao.join(vo);
 		if(result2==1){%>
 			<script>
-			alert("È¸¿ø°¡ÀÔÀ» ÃàÇÏÇÕ´Ï´Ù");
+			alert("íšŒì›ê°€ìž…ì„ ì¶•í•˜í•©ë‹ˆë‹¤");
 			location.href="user_login.jsp";
 			</script>
 		<%}
 		else{%>
 			<script>
-			alert("È¸¿ø°¡ÀÔÀÌ ½ÇÆÐµÆ½À´Ï´Ù");
+			alert("íšŒì›ê°€ìž…ì´ ì‹¤íŒ¨ëìŠµë‹ˆë‹¤");
 			history.go(-1);
 			</script>
 		<%}	

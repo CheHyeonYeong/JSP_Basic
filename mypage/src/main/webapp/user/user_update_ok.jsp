@@ -1,8 +1,7 @@
 <%@page import="com.myweb.user.model.UserVO"%>
 <%@page import="com.myweb.user.model.UserDAO"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<%
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%><%
 
 	request.setCharacterEncoding("utf-8");
 
@@ -14,7 +13,7 @@
 	String email = request.getParameter("email");
 	String address = request.getParameter("address");
 	
-	//dao »ı¼º
+	//dao ìƒì„±
 	UserDAO dao = UserDAO.getInstance();
 	
 	UserVO vo = new UserVO(id, null, name, email, address,null);
@@ -24,13 +23,13 @@
 		session.setAttribute("user_name",name);
 	%>
 		<script>
-		alert("È¸¿øÁ¤º¸°¡ ¼öÁ¤µÇ¾ú½À´Ï´Ù");
+		alert("íšŒì›ì •ë³´ê°€ ìˆ˜ì •ë˜ì—ˆìŠµë‹ˆë‹¤");
 		location.href="user_mypage.jsp";
 		</script>
 	<%}
 	else{%>
 		<script>
-		alert("È¸¿øÁ¤º¸ ¼öÁ¤¿¡ ½ÇÆĞÇß½À´Ï´Ù);
+		alert("íšŒì›ì •ë³´ ìˆ˜ì •ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤);
 		location.href="user_mypage.jsp";
 		</script>
 	<%}	
