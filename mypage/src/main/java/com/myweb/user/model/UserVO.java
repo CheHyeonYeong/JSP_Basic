@@ -9,7 +9,9 @@ public class UserVO {
 	    private String email;
 	    private String address;
 	    private Timestamp regdate;
-	    
+	    public UserVO() {
+			super();
+		}
 	    public UserVO(String id, String pw, String name, String email, String address, Timestamp regdate) {
 			super();
 			this.id = id;
