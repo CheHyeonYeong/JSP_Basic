@@ -16,7 +16,7 @@ public class PageVO {
 		
 		this.total = total;
 		this.cri = cri;
-		this.pageNum = cri.getPageNum();
+		this.pageNum = cri.getPageNum(); //전체 페이지 번호
 		
 		//끝페이지 계산
 		//조회하는 페이지 번호 1~10인 경우 => 1~10
